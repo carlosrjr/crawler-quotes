@@ -5,5 +5,4 @@ class Quote
   field :author, type: String
   field :about_author, type: String
   field :tags, type: Array
-
 end

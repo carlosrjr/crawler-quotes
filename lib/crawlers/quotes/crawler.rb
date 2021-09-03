@@ -1,39 +1,39 @@
 module Crawlers
   require 'nokogiri'
-  require 'open-uri'
+  require 'rest-client'
   
   module Quotes
     BASE_URL ="http://quotes.toscrape.com"
     
     class Crawler
       def searchQuotes(tag)
-
         url = "#{BASE_URL}/tag/#{tag}/"
-
+        
         begin
-          html = Nokogiri::HTML.parse(open(url))
+          html = RestClient.get(url)
+          doc = Nokogiri::HTML.parse(html)
           
-          quotes = html.css('.quote')
-          
-          
+          quotes = doc.css('.quote')
           
           quotes.each do |quoteItem|
-            quote = Quote.new
+            q = Quote.new
             
-            puts "#########################################"
-            quote.quote = quoteItem.css('.text').text
-            quote.author = quoteItem.css('.author').text
+            q.quote = quoteItem.css('.text').text
+            q.author = quoteItem.css('.author').text
             tagsQuote = quoteItem.css('.tag')
-            quote.tags = []
+            q.tags = []
             tagsQuote.each do |tagQuote|
-              quote.tags << tagQuote.text
+              q.tags << tagQuote.text
             end
-            puts ">>>>>>>Quotes #{quote.quote}"
-            
-            quote.save
-            puts "#########################################"
+
+            q.save
           end
+
+          t = Tag.new
+          t.title = tag
+          t.save
         rescue
+          puts ">>>>>> FALHOU!"
           return false
         end
         
@@ -41,7 +41,7 @@ module Crawlers
       end
 
       def searchAuthor(url)
-        puts ">>>>>>>>>> URL: #{url}"
+        puts " >>>>>>>>>> URL: #{url}"
       end
     end
   end

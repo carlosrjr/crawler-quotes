@@ -1,6 +1,7 @@
 class Tag
   include Mongoid::Document
-  field :tag, type: String
- 
-  has_many :Quote
+  include Mongoid::Timestamps
+  field :title, type: String
+  
+  validates_uniqueness_of :title
 end

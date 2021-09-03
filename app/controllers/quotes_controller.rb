@@ -19,12 +19,4 @@ class QuotesController < ApplicationController
     render json: { quotes: "aaa" } 
   end
 
-  private 
-    def findTagsDB(tag) 
-      Tag.where(tag)
-    end
-
-    def resultFromDB(tag)
-      result
-    end
 end
