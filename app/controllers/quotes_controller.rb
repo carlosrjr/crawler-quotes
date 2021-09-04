@@ -16,7 +16,7 @@ class QuotesController < ApplicationController
 
     Crawlers::Quotes::Crawler.new.searchQuotes(tag)
 
-    render json: { quotes: "aaa" } 
+    render json: { quotes: Quote.all } 
   end
 
 end

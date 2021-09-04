@@ -20,11 +20,17 @@ module Crawlers
             
             q.quote = quoteItem.css('.text').text
             q.author = quoteItem.css('.author').text
+            q.author_about = "#{BASE_URL}#{quoteItem.css('a')[0]['href']}"
             tagsQuote = quoteItem.css('.tag')
             q.tags = []
             tagsQuote.each do |tagQuote|
               q.tags << tagQuote.text
             end
+
+            
+            
+
+    
 
             q.save
           end
@@ -38,10 +44,6 @@ module Crawlers
         end
         
         return true
-      end
-
-      def searchAuthor(url)
-        puts " >>>>>>>>>> URL: #{url}"
       end
     end
   end

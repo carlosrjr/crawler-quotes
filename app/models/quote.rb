@@ -3,6 +3,8 @@ class Quote
 
   field :quote, type: String
   field :author, type: String
-  field :about_author, type: String
+  field :author_about, type: String
   field :tags, type: Array
+
+  validates_uniqueness_of :quote
 end
