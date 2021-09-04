@@ -14,9 +14,41 @@ class QuotesController < ApplicationController
   def search
     tag = params[:tag]
 
-    Crawlers::Quotes::Crawler.new.searchQuotes(tag)
+    if not has_tag(tag)
+      puts "ENTROUU AQUI <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
+      Crawlers::Quotes::Crawler.new.searchQuotes(tag)
+    end
 
-    render json: { quotes: Quote.all } 
+    render json: { quotes: filterQuotes(tag) }
   end
+
+  private
+    def has_tag(tag)
+      tags = Tag.all
+
+      tags.each do |tagItem| 
+        if tagItem.title == tag
+          puts ">>>>>>>>> Já Existe"
+          return true
+        end
+      end
+
+      puts ">>>>>>>>> Não Existe"
+      
+      return false
+    end
+
+    def filterQuotes(tag)
+      quotes = Quote.all
+
+      filtered = []
+      quotes.each do |quote|
+        if quote.tags.include? tag
+          filtered << quote
+        end
+      end
+
+      filtered
+    end
 
 end

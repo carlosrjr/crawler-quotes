@@ -3,9 +3,11 @@ module Crawlers
   require 'rest-client'
   
   module Quotes
+    # URL base para obter os quotes
     BASE_URL ="http://quotes.toscrape.com"
     
     class Crawler
+      # Method utilizado para fazer o scrapping dos quotes.
       def searchQuotes(tag)
         url = "#{BASE_URL}/tag/#{tag}/"
         
@@ -26,11 +28,6 @@ module Crawlers
             tagsQuote.each do |tagQuote|
               q.tags << tagQuote.text
             end
-
-            
-            
-
-    
 
             q.save
           end
