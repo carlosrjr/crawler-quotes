@@ -7,48 +7,24 @@ class QuotesController < ApplicationController
   def index
     @quote = Quote.all
 
-    render json: @quote
+    render json: { "quotes": @quote.as_json(:except => [ :_id ]) }
   end
 
   # GET /quotes/:tag
   def search
     tag = params[:tag]
-
-    if not has_tag(tag)
-      puts "ENTROUU AQUI <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
+    
+    if not tag_exists?(tag)
       Crawlers::Quotes::Crawler.new.searchQuotes(tag)
     end
+    
+    @quotes = Quote.where(tags: tag)
 
-    render json: { quotes: filterQuotes(tag) }
+    render json: { "quotes": @quotes.as_json(:except => [ :_id ]) }
   end
 
   private
-    def has_tag(tag)
-      tags = Tag.all
-
-      tags.each do |tagItem| 
-        if tagItem.title == tag
-          puts ">>>>>>>>> Já Existe"
-          return true
-        end
-      end
-
-      puts ">>>>>>>>> Não Existe"
-      
-      return false
+    def tag_exists?(tag)
+      Tag.where(title: tag).count > 0 ? true : false
     end
-
-    def filterQuotes(tag)
-      quotes = Quote.all
-
-      filtered = []
-      quotes.each do |quote|
-        if quote.tags.include? tag
-          filtered << quote
-        end
-      end
-
-      filtered
-    end
-
 end

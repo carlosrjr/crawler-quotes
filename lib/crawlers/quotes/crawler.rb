@@ -8,13 +8,13 @@ module Crawlers
     
     class Crawler
       # Method utilizado para fazer o scrapping dos quotes.
-      def searchQuotes(tag)
-        url = "#{BASE_URL}/tag/#{tag}/"
+      def searchQuotes(tag, page=1)
+        url = "#{BASE_URL}/tag/#{tag}/page/#{page}/"
         
         begin
           html = RestClient.get(url)
           doc = Nokogiri::HTML.parse(html)
-          
+
           quotes = doc.css('.quote')
           
           quotes.each do |quoteItem|
