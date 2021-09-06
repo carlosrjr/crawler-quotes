@@ -3,10 +3,9 @@ class QuotesController < ApplicationController
   include ActionController::HttpAuthentication::Token::ControllerMethods
 
   before_action :authenticate
-  before_action :set_quote, only: [:show, :update, :destroy]
 
   # GET /quotes
-  def index
+  def show
     quotes = Quote.all
     render json: quotes, root: 'quotes', adapter: :json, each_serializer: QuoteSerializer
   end

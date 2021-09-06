@@ -1,5 +1,9 @@
 class TagsController < ApplicationController
 
+  include ActionController::HttpAuthentication::Token::ControllerMethods
+
+  before_action :authenticate
+
   # GET /tags
   def show
     tags = Tag.all
@@ -40,5 +44,12 @@ class TagsController < ApplicationController
   private
     def tag_exists?(tag)
       Tag.where(title: tag).count > 0 ? true : false
+    end
+
+    def authenticate
+      authenticate_or_request_with_http_token do |token, options|
+        hmac_secret = 'In0va_M1nd!'
+        JWT.decode token, hmac_secret, true, { :algorithm => 'HS256' }
+      end
     end
 end

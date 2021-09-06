@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  get "/quotes", to: "quotes#index"
+  get "/quotes", to: "quotes#show"
   get "/quotes/:tag", to: "quotes#search"
   delete "/clean/quotes", to: "quotes#clean"
   
