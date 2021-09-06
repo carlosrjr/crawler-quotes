@@ -85,8 +85,8 @@ class AuthsController < ApplicationController
       str.length >= min ? true : false
     end
 
-    def check_password(userPassword, password)
-      BCrypt::Password.new(userPassword).is_password? password
+    def check_password(user_password, password)
+      BCrypt::Password.new(user_password).is_password? password
     end
 
     def unauthorized(message = "Acesso não autorizado.")

@@ -16,7 +16,7 @@ class QuotesController < ApplicationController
     tag = params[:tag]
     
     if not tag_exists?(tag)
-      Crawlers::Quotes::Crawler.new.searchQuotes(tag)
+      Crawlers::Quotes::Crawler.new.search_quotes(tag)
     end
     
     quotes = Quote.where(tags: tag)
