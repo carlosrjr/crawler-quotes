@@ -27,5 +27,7 @@ module CrawlerQuotes
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
     config.autoload_paths += %W(#{config.root}/lib)
+    config.time_zone = 'America/Sao_Paulo'
+    config.active_record.default_timezone = :local
   end
 end
