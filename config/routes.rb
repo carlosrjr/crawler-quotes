@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
+  
   get "/quotes", to: "quotes#index"
   get "/quotes/:tag", to: "quotes#search"
-  delete "/quotes/:tag", to: "quotes#remove"
-  delete "/clean", to: "quotes#clean"
+  delete "/clean/quotes", to: "quotes#clean"
+  
+  get "/tags", to: "tags#show"
+  get "/tags/:tag", to: "tags#search"
+  delete "/tags/:tag", to: "tags#remove"
+  delete "/clean/tags", to: "tags#clean"
 
   post "/auth/signin", to: "auths#signin"
   post "/auth/signup", to: "auths#signup"

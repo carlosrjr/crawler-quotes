@@ -42,12 +42,15 @@ module Crawlers
             if quotes_list.length == 0
               return false
             else
-              t = Tag.new
-              t.title = tag
-              t.save  
+              
               quotes_list.map do |q|
                 q.save
               end
+              
+              t = Tag.new
+              t.title = tag
+              t.register_date = DateTime.now
+              t.save
             end
 
           end

@@ -23,22 +23,9 @@ class QuotesController < ApplicationController
     render json: quotes, root: 'quotes', adapter: :json, each_serializer: QuoteSerializer
   end
 
-  def remove
-    tag = params[:tag]
-    
-    if tag_exists?(tag)
-      Tag.delete_all(title: tag)
-      render json: Quote.all, root: 'quotes', adapter: :json, each_serializer: QuoteSerializer
-    else
-      render json: { "Error": "A tag '#{tag}' não foi encontrada." }, status: :not_found
-    end
-  end
-
   def clean
-    Tag.delete_all
     Quote.delete_all
-
-    render json: { Success: "Todas as tags e quotes foram removidos." }
+    render json: { Success: "Todos os quotes foram removidos." }
   end
   
   private
