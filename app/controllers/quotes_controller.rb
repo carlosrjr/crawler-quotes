@@ -5,8 +5,6 @@ class QuotesController < ApplicationController
   before_action :authenticate
   before_action :set_quote, only: [:show, :update, :destroy]
 
-  require_relative "../../lib/crawlers/quotes/crawler.rb"
-
   # GET /quotes
   def index
     @quote = Quote.all
@@ -29,7 +27,7 @@ class QuotesController < ApplicationController
 
   def authenticate
     authenticate_or_request_with_http_token do |token, options|
-      hmac_secret = 'In0vaM1nd'
+      hmac_secret = 'In0va_M1nd!'
       JWT.decode token, hmac_secret, true, { :algorithm => 'HS256' }
     end
   end
