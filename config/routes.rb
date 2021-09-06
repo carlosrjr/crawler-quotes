@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
-  #resources :quotes
-
   get "/quotes", to: "quotes#index"
   get "/quotes/:tag", to: "quotes#search"
+  delete "/quotes/:tag", to: "quotes#remove"
+  delete "/clean", to: "quotes#clean"
 
   post "/auth/signin", to: "auths#signin"
   post "/auth/signup", to: "auths#signup"
+  delete "/auth/remove", to: "auths#remove"
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

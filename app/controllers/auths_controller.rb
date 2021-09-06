@@ -7,10 +7,11 @@ class AuthsController < ApplicationController
 
     if check_user_exists?(username)
       user = User.find_by(username: username)
-      if BCrypt::Password.new(user.password).is_password? password
+      if check_password(user.password, password)
         render json: {
           username: username,
           jwt:{
+            "prefix": "Bearer",
             encodedToken: generate_access_token({ 
               "username": username,
               "date_access": DateTime.now
@@ -19,10 +20,10 @@ class AuthsController < ApplicationController
           }
         }
       else
-        render json: { Unauthorized: "Acesso não autorizado." }, status: :unauthorized
+        unauthorized()
       end
     else
-      render json: { Unauthorized: "Acesso não autorizado." }, status: :unauthorized
+      unauthorized()
     end
   end
 
@@ -41,10 +42,27 @@ class AuthsController < ApplicationController
 
         render json: { "success": "Usuário criado com sucesso." }
       else
-        render json: { "Error": "Os campos 'username' e 'password' devem ter no mínimo 6 caracteres." }, status: :unauthorized
+        unauthorized("Os campos 'username' e 'password' devem ter no mínimo 6 caracteres.")
       end
     else
-      render json: { "Error": "Usuário já existe." }, status: :unauthorized
+      unauthorized("Usuário já existe.")
+    end
+  end
+
+  def remove
+    username = params[:username]
+    password = params[:password]
+    
+    if check_user_exists?(username)
+      user = User.find_by(username: username)
+      if check_password(user.password, password)
+        User.delete_all(username: username)
+        render json: { "Success": "Usuário '#{username}' foi removido." }
+      else
+        unauthorized()
+      end
+    else
+      unauthorized()
     end
   end
 
@@ -65,5 +83,13 @@ class AuthsController < ApplicationController
 
     def check_size(str, min=6) 
       str.length >= min ? true : false
+    end
+
+    def check_password(userPassword, password)
+      BCrypt::Password.new(userPassword).is_password? password
+    end
+
+    def unauthorized(message = "Acesso não autorizado.")
+      render json: { Unauthorized: message }, status: :unauthorized
     end
 end

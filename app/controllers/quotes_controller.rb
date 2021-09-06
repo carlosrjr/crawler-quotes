@@ -7,9 +7,8 @@ class QuotesController < ApplicationController
 
   # GET /quotes
   def index
-    @quote = Quote.all
-
-    render json: { "quotes": @quote.as_json(:except => [ :_id ]) }
+    quotes = Quote.all
+    render json: quotes, root: 'quotes', adapter: :json, each_serializer: QuoteSerializer
   end
 
   # GET /quotes/:tag
@@ -20,20 +19,37 @@ class QuotesController < ApplicationController
       Crawlers::Quotes::Crawler.new.searchQuotes(tag)
     end
     
-    @quotes = Quote.where(tags: tag)
-
-    render json: { "quotes": @quotes.as_json(:except => [ :_id ]) }
+    quotes = Quote.where(tags: tag)
+    render json: quotes, root: 'quotes', adapter: :json, each_serializer: QuoteSerializer
   end
 
-  def authenticate
-    authenticate_or_request_with_http_token do |token, options|
-      hmac_secret = 'In0va_M1nd!'
-      JWT.decode token, hmac_secret, true, { :algorithm => 'HS256' }
+  def remove
+    tag = params[:tag]
+    
+    if tag_exists?(tag)
+      Tag.delete_all(title: tag)
+      render json: Quote.all, root: 'quotes', adapter: :json, each_serializer: QuoteSerializer
+    else
+      render json: { "Error": "A tag '#{tag}' não foi encontrada." }, status: :not_found
     end
   end
 
+  def clean
+    Tag.delete_all
+    Quote.delete_all
+
+    render json: { Success: "Todas as tags e quotes foram removidos." }
+  end
+  
   private
     def tag_exists?(tag)
       Tag.where(title: tag).count > 0 ? true : false
+    end
+
+    def authenticate
+      authenticate_or_request_with_http_token do |token, options|
+        hmac_secret = 'In0va_M1nd!'
+        JWT.decode token, hmac_secret, true, { :algorithm => 'HS256' }
+      end
     end
 end
