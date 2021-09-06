@@ -42,10 +42,13 @@ class TagsController < ApplicationController
   end
 
   private
+    # Verifica se existe uma tag cadastrada.
     def tag_exists?(tag)
       Tag.where(title: tag).count > 0 ? true : false
     end
 
+    # Decodifica o token JWT fornecido na chamada, permitindo que o cliente tenha
+    # acesso aos métodos.
     def authenticate
       authenticate_or_request_with_http_token do |token, options|
         hmac_secret = 'In0va_M1nd!'

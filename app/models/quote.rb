@@ -6,5 +6,6 @@ class Quote
   field :author_about, type: String
   field :tags, type: Array
 
+  # Garante que o quote não será duplicado.
   validates_uniqueness_of :quote
 end

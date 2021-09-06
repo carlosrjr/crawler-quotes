@@ -1,6 +1,7 @@
 class AuthsController < ApplicationController
   include BCrypt
 
+  # POST /auth/signin
   def signin
     username = params[:username]
     password = params[:password]
@@ -27,6 +28,7 @@ class AuthsController < ApplicationController
     end
   end
 
+  # POST /auth/signup
   def signup
     username = params[:username]
     password = params[:password]
@@ -49,6 +51,7 @@ class AuthsController < ApplicationController
     end
   end
 
+  # DELETE /auth/remove
   def remove
     username = params[:username]
     password = params[:password]
@@ -67,28 +70,28 @@ class AuthsController < ApplicationController
   end
 
   private
+    # Verifica se um usuário existe.
     def check_user_exists?(username)
-      begin
-        User.find_by(username: username) 
-        return true
-      rescue
-        return false
-      end
+      User.where(username: username).count == 1 ? true : false
     end
 
+    # Gera um Token JWT.
     def generate_access_token(payload={})
       hmac_secret = "In0va_M1nd!"
       return JWT.encode payload, hmac_secret, "HS256"
     end
 
+    # Verifica o tamanho minimo de carateres do username se password.
     def check_size(str, min=6) 
       str.length >= min ? true : false
     end
 
+    # Verifica se a senha é válida para o usuário.
     def check_password(user_password, password)
       BCrypt::Password.new(user_password).is_password? password
     end
 
+    # Retorna um json com a mensagem de acesso não autorizado. 
     def unauthorized(message = "Acesso não autorizado.")
       render json: { Unauthorized: message }, status: :unauthorized
     end
