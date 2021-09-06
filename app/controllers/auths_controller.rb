@@ -19,10 +19,10 @@ class AuthsController < ApplicationController
           }
         }
       else
-        render json: { Unauthorized: "Acesso não autorizado." }
+        render json: { Unauthorized: "Acesso não autorizado." }, status: :unauthorized
       end
     else
-      render json: { Unauthorized: "Acesso não autorizado." }
+      render json: { Unauthorized: "Acesso não autorizado." }, status: :unauthorized
     end
   end
 
@@ -41,10 +41,10 @@ class AuthsController < ApplicationController
 
         render json: { "success": "Usuário criado com sucesso." }
       else
-        render json: { "Error": "Os campos 'username' e 'password' devem ter no mínimo 6 caracteres." }
+        render json: { "Error": "Os campos 'username' e 'password' devem ter no mínimo 6 caracteres." }, status: :unauthorized
       end
     else
-      render json: { "Error": "Usuário já existe." }
+      render json: { "Error": "Usuário já existe." }, status: :unauthorized
     end
   end
 
