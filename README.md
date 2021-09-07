@@ -79,6 +79,7 @@ Para desenvolver esta solução, foi utilizado:
 <table>
   <thead>
     <tr>
+      <td><strong>Code</strong></td>
       <td><strong>Status</strong></td>
       <td><strong>Description</strong></td>
     </tr>
@@ -86,18 +87,22 @@ Para desenvolver esta solução, foi utilizado:
   <tbody>
     <tr>
       <td>200</td>
+      <td>OK</td>
       <td>Indica que a requição teve sucesso.</td>
     </tr>
     <tr>
       <td>400</td>
+      <td>Bad Request</td>
       <td>Indica que o formato da requisição não esta correto ou os dados estão incorretos.</td>
     </tr>
     <tr>
       <td>401</td>
+      <td>Unauthorized</td>
       <td>Indica que o usuário não tem autorização para ter acesso ou está utilizando um token inválido.</td>
     </tr>
     <tr>
       <td>404</td>
+      <td>Not Found</td>
       <td>Indica que não foi encontrado um resultado para a pesquisa.</td>
     </tr>
   </tbody>
