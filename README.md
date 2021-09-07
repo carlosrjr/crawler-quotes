@@ -112,7 +112,7 @@ Para desenvolver esta solução, foi utilizado:
 
 Para utilizar os endpoints, é necessário possuir um usuário cadastrado para realizar login e obter o token **JWT** para que o acesso seja permitido. 
 
-### Endpoint: /auth/signup
+### Endpoint: POST /auth/signup
 
 Para cadastrar um usuário, deve informar um **username** e um **password** no formato **JSON** na requisição.
 
@@ -153,7 +153,7 @@ Quando o **username** ou **password** possuem menos de 6 caracteres:
 }
 ```
 
-### Endpoint: /auth/signin
+### Endpoint: POST /auth/signin
 
 Para realizar o login de um usuário, deve informar um **username** e um **password** no formato **JSON** na requisição.
 
@@ -187,5 +187,142 @@ Quando o **username** ou **password** são inválidos:
 {
   "status_code": 401,
   "message": "Acesso não autorizado."
+}
+```
+
+## 5. Consultas
+
+Esta sessão é distinada a mostrar como funciona as consultas na API.
+
+### Endpoint: GET /quotes
+
+Lista todos os quotes armazenos no bando de dados.
+
+#### Response
+
+```json
+{
+  "quotes": [
+    {
+      "quote": "“To the well-organized mind, death is but the next great adventure.”",
+      "author": "J.K. Rowling",
+      "author_about": "http://quotes.toscrape.com/author/J-K-Rowling",
+      "tags": [
+        "death",
+        "inspirational"
+      ]
+    },
+    {
+      "quote": "“The fear of death follows from the fear of life. A man who lives fully is prepared to die at any time.”",
+      "author": "Mark Twain",
+      "author_about": "http://quotes.toscrape.com/author/Mark-Twain",
+      "tags": [
+        "death",
+        "life"
+      ]
+    },
+    {
+      "quote": "“I'm the one that's got to die when it's time for me to die, so let me live my life the way I want to.”",
+      "author": "Jimi Hendrix",
+      "author_about": "http://quotes.toscrape.com/author/Jimi-Hendrix",
+      "tags": [
+        "death",
+        "life"
+      ]
+    },
+    {
+      "quote": "“Not all those who wander are lost.”",
+      "author": "J.R.R. Tolkien",
+      "author_about": "http://quotes.toscrape.com/author/J-R-R-Tolkien",
+      "tags": [
+        "bilbo",
+        "journey",
+        "lost",
+        "quest",
+        "travel",
+        "wander"
+      ]
+    }
+  ]
+}
+```
+
+### Endpoint: GET /quotes/:tag
+
+Lista os quotes filtrando pela tag. Se a tag ainda não existir no banco, faz o scrape.
+
+#### Response
+
+Utilizando o endpoint **/quotes/travel**
+
+```json
+{
+  "quotes": [
+    {
+      "quote": "“Not all those who wander are lost.”",
+      "author": "J.R.R. Tolkien",
+      "author_about": "http://quotes.toscrape.com/author/J-R-R-Tolkien",
+      "tags": [
+        "bilbo",
+        "journey",
+        "lost",
+        "quest",
+        "travel",
+        "wander"
+      ]
+    }
+  ]
+}
+```
+
+### Endpoint: GET /tags
+
+Lista todas as tags cadastradas no banco de dados.
+
+#### Response
+
+```json
+{
+  "tags": [
+    {
+      "title": "death",
+      "register_date": "2021-09-06T22:56:48-03:00"
+    },
+    {
+      "title": "travel",
+      "register_date": "2021-09-06T22:58:27-03:00"
+    }
+  ]
+}
+```
+
+### Endpoint: GET /tags/:tag
+
+Exibe uma tag cadastrada no banco de dados, caso ela exista.
+
+#### Response
+
+Utilizando o endpoint **/tags/travel**
+
+```json
+{
+  "tags": [
+    {
+      "title": "travel",
+      "register_date": "2021-09-06T22:58:27-03:00"
+    }
+  ]
+}
+```
+#### Errors
+
+Caso não exista, será retornado um erro **Not Found** dizendo que a tag não foi encontrada no banco de dados.
+
+Utilizando o endpoint **/tags/unknown**
+
+```json
+{
+  "status_code": 404,
+  "message": "A tag 'unknown' não foi encontrada."
 }
 ```
