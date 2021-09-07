@@ -29,7 +29,7 @@ class TagsController < ApplicationController
     
     if tag_exists?(tag)
       Tag.delete_all(title: tag)
-      render json: { Success: "A tag '#{tag}' foi removida." }
+      success("A tag '#{tag}' foi removida.")
     else
       notfound("A tag '#{tag}' não foi encontrada.")
     end
@@ -38,7 +38,7 @@ class TagsController < ApplicationController
   # DELETE /clean/tags
   def clean
     Tag.delete_all
-    render json: { Success: "Todas as tags foram removidas." }
+    success("Todas as tags foram removidas.")
   end
 
   private
