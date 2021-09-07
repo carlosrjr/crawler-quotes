@@ -81,7 +81,7 @@ class AuthsController < ApplicationController
       return JWT.encode payload, hmac_secret, "HS256"
     end
 
-    # Verifica o tamanho minimo de carateres do username se password.
+    # Verifica o tamanho minimo de carateres do username e password.
     def check_size(str, min=6) 
       str.length >= min ? true : false
     end
