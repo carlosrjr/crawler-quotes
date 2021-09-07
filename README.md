@@ -74,7 +74,36 @@ Para desenvolver esta solução, foi utilizado:
   </tbody>
 </table>
 
-## 3. Autenticação
+## 3. Status code
+
+<table>
+  <thead>
+    <tr>
+      <td><strong>Status</strong></td>
+      <td><strong>Description</strong></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>200</td>
+      <td>Indica que a requição teve sucesso.</td>
+    </tr>
+    <tr>
+      <td>400</td>
+      <td>Indica que o formato da requisição não esta correto ou os dados estão incorretos.</td>
+    </tr>
+    <tr>
+      <td>401</td>
+      <td>Indica que o usuário não tem autorização para ter acesso ou está utilizando um token inválido.</td>
+    </tr>
+    <tr>
+      <td>404</td>
+      <td>Indica que não foi encontrado um resultado para a pesquisa.</td>
+    </tr>
+  </tbody>
+</table>
+
+## 4. Autenticação
 
 Para utilizar os endpoints, é necessário possuir um usuário cadastrado para realizar login e obter o token **JWT** para que o acesso seja permitido. 
 
