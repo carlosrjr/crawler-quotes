@@ -10,7 +10,27 @@ Para desenvolver esta solução, foi utilizado:
 - Rails 5.0.7.2
 - Mongodb 4.2.15
 
-## 2. API Endpoints
+## 2. Como executa o projeto
+
+Para executar este projeto, é necessario que as dependencias do projeto estejam instaladas e os serviços estejam ativos.
+
+- Instale as dependencias do projeto.
+
+  > ~$ bundle install
+
+- Para iniciar o serviço do MongoDB, execute:
+
+  > ~$ sudo systemctl start mongod
+
+- Verifique se o serviço do mongo está ativo:
+
+  > ~$ systemctl status mongod
+
+- Inicie o servidor local rails
+
+  > ~$ rails s
+
+## 3. API Endpoints
 
 <table>
   <thead>
@@ -74,7 +94,7 @@ Para desenvolver esta solução, foi utilizado:
   </tbody>
 </table>
 
-## 3. Status code
+## 4. Status code
 
 <table>
   <thead>
@@ -108,7 +128,7 @@ Para desenvolver esta solução, foi utilizado:
   </tbody>
 </table>
 
-## 4. Autenticação
+## 5. Autenticação
 
 Para utilizar os endpoints, é necessário possuir um usuário cadastrado para realizar login e obter o token **JWT** para que o acesso seja permitido. 
 
@@ -191,7 +211,7 @@ Quando o **username** ou **password** são inválidos:
 }
 ```
 
-## 5. Consultas
+## 6. Consultas
 
 Esta sessão é distinada a mostrar como funciona as consultas na API. Para ter acesso, é preciso realizar o login antes para obter o token **JWT** e adicioná-lo nas requisições. Para fazer isso via **Postman**, você pode selecionar a aba **Authorization**, selecine o type **Bearer Token** e adicione o token, ou envie o token no header da requisição.
 
@@ -328,7 +348,7 @@ Utilizando o endpoint **/tags/unknown**
 }
 ```
 
-## 6. Clean
+## 7. Clean
 
 Nesta sessão será mostrado o funcionamento dos métodos para apagar as informações no banco de dados.
 
