@@ -24,12 +24,12 @@ Para desenvolver esta solução, foi utilizado:
     <tr>
       <td>POST</td>
       <td>Cria um novo usuário.</td>
-      <td>/auth/sigup</td>
+      <td>/auth/signup</td>
     </tr>
     <tr>
       <td>POST</td>
       <td>Realiza o login de um usuário cadastrado para obter um token de acesso.</td>
-      <td>/auth/sigin</td>
+      <td>/auth/signin</td>
     </tr>
     <tr>
       <td>GET</td>
