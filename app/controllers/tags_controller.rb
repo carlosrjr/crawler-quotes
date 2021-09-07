@@ -29,7 +29,7 @@ class TagsController < ApplicationController
     
     if tag_exists?(tag)
       Tag.delete_all(title: tag)
-      render json: Tag.all, root: 'tags', adapter: :json, each_serializer: TagSerializer
+      render json: { Success: "A tag '#{tag}' foi removida." }
     else
       notfound("A tag '#{tag}' não foi encontrada.")
     end
