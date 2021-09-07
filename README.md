@@ -326,3 +326,97 @@ Utilizando o endpoint **/tags/unknown**
   "message": "A tag 'unknown' não foi encontrada."
 }
 ```
+
+## 6. Clean
+
+Nesta sessão será mostrado o funcionamento dos métodos para apagar as informações no banco de dados.
+
+### Endpoint: DELETE /tags/:tag
+
+Remove uma tag que esteja registrada no banco de dados.
+
+#### Response
+
+Utilizando o endpoint **/tags/travel**
+
+```json
+{
+  "Success": "A tag 'travel' foi removida."
+}
+```
+
+#### Errors
+
+Utilizando o endpoint **/tags/unknown**
+
+```json
+{
+  "status_code": 404,
+  "message":  "A tag 'unknown' não foi encontrada."
+}
+```
+
+### Endpoint: DELETE /clean/quotes
+
+Limpa todos os quotes e tags cadastrados no banco de dados.
+
+#### Response
+
+```json
+{
+    "Success": "Todos os quotes e tags foram removidos."
+}
+```
+
+### Endpoint: DELETE /clean/tags
+
+Limpa todas as tags cadastradas no banco de dados. Este endpoint não remove os quotes cadastrados.
+
+#### Response
+
+```json
+{
+  "Success": "Todas as tags foram removidas."
+}
+```
+
+### Endpoint: DELETE /auth/remove
+
+Remove um usuário cadastrado. Para remover um usuário, deve informar um **username** e um **password** no formato **JSON** na requisição.
+
+#### Request
+
+```json
+{
+  "username": "administrador",
+  "password": "123456"
+}
+```
+
+#### Response
+
+```json
+{
+  "Success": "Usuário 'administrador' foi removido."
+}
+```
+
+#### Errors
+
+Caso o **username** não seja encontrado no banco de dados.
+
+```json
+{
+  "status_code": 404,
+  "message": "O usuário 'administrador' não foi encontrado."
+}
+```
+
+Caso o **password** esteja incorreto.
+
+```json
+{
+  "status_code": 401,
+  "message": "Acesso não autorizado."
+}
+```
