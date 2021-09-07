@@ -358,13 +358,13 @@ Utilizando o endpoint **/tags/unknown**
 
 ### Endpoint: DELETE /clean/quotes
 
-Limpa todos os quotes e tags cadastrados no banco de dados.
+Limpa todos os quotes e tags cadastrados no banco de dados. Apagar as tags é necessário, pois quando for feita uma nova consulta, não haverá cache dos cotes e não será possível fazer um novo scrape, caso as tags estejam registradas no banco de dados.
 
 #### Response
 
 ```json
 {
-    "Success": "Todos os quotes e tags foram removidos."
+  "Success": "Todos os quotes e tags foram removidos."
 }
 ```
 
