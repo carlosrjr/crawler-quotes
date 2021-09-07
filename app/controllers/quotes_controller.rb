@@ -27,7 +27,7 @@ class QuotesController < ApplicationController
     Quote.delete_all
     Tag.delete_all
 
-    render json: { Success: "Todos os quotes e tags foram removidos." }
+    success("Todos os quotes e tags foram removidos.")
   end
   
   private

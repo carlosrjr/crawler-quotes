@@ -129,7 +129,8 @@ Para cadastrar um usuário, deve informar um **username** e um **password** no f
 
 ```json
 {
-  "success": "Usuário criado com sucesso."
+  "status_code": 200,
+  "message": "Usuário criado com sucesso."
 }
 ```
 
@@ -341,7 +342,8 @@ Utilizando o endpoint **/tags/travel**
 
 ```json
 {
-  "Success": "A tag 'travel' foi removida."
+  "status_code": 200,
+  "message": "A tag 'travel' foi removida."
 }
 ```
 
@@ -352,7 +354,7 @@ Utilizando o endpoint **/tags/unknown**
 ```json
 {
   "status_code": 404,
-  "message":  "A tag 'unknown' não foi encontrada."
+  "message": "A tag 'unknown' não foi encontrada."
 }
 ```
 
@@ -364,7 +366,8 @@ Limpa todos os quotes e tags cadastrados no banco de dados. Apagar as tags é ne
 
 ```json
 {
-  "Success": "Todos os quotes e tags foram removidos."
+  "status_code": 200,
+  "message": "Todos os quotes e tags foram removidos."
 }
 ```
 
@@ -376,7 +379,8 @@ Limpa todas as tags cadastradas no banco de dados. Este endpoint não remove os 
 
 ```json
 {
-  "Success": "Todas as tags foram removidas."
+  "status_code": 200,
+  "message": "Todas as tags foram removidas."
 }
 ```
 
@@ -397,7 +401,8 @@ Remove um usuário cadastrado. Para remover um usuário, deve informar um **user
 
 ```json
 {
-  "Success": "Usuário 'administrador' foi removido."
+  "status_code": 200,
+  "message": "Usuário 'administrador' foi removido."
 }
 ```
 

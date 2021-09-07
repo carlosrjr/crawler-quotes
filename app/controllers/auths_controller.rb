@@ -42,7 +42,7 @@ class AuthsController < ApplicationController
         user.password = BCrypt::Password.create(password)
         user.save
 
-        render json: { "success": "Usuário criado com sucesso." }
+        success("Usuário criado com sucesso.")
       else
         badrequest("Os campos 'username' e 'password' devem ter no mínimo 6 caracteres.")
       end
@@ -60,7 +60,7 @@ class AuthsController < ApplicationController
       user = User.find_by(username: username)
       if check_password(user.password, password)
         User.delete_all(username: username)
-        render json: { "Success": "Usuário '#{username}' foi removido." }
+        success("Usuário '#{username}' foi removido.")
       else
         unauthorized()
       end

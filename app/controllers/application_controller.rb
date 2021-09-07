@@ -13,4 +13,9 @@ class ApplicationController < ActionController::API
   def notfound(message = "Não foi encontrado.")
     render json: { status_code: 404, message: message }, status: :not_found
   end
+
+  # Retorna um json com a mensagem de que não foi encontrado.
+  def success(message = "Sucesso.")
+    render json: { status_code: 200, message: message }, status: :ok
+  end
 end
