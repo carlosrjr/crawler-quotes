@@ -44,10 +44,10 @@ class AuthsController < ApplicationController
 
         render json: { "success": "Usuário criado com sucesso." }
       else
-        unauthorized("Os campos 'username' e 'password' devem ter no mínimo 6 caracteres.")
+        badrequest("Os campos 'username' e 'password' devem ter no mínimo 6 caracteres.")
       end
     else
-      unauthorized("Usuário já existe.")
+      badrequest("Usuário já existe.")
     end
   end
 
@@ -93,6 +93,11 @@ class AuthsController < ApplicationController
 
     # Retorna um json com a mensagem de acesso não autorizado. 
     def unauthorized(message = "Acesso não autorizado.")
-      render json: { Unauthorized: message }, status: :unauthorized
+      render json: { status_code: 401, message: message }, status: :unauthorized
+    end
+
+    # Retorna um json com a mensagem de requisição mal formada.
+    def badrequest(message = "Requisição mal formada.")
+      render json: { status_code: 400, message: message }, status: :bad_request
     end
 end

@@ -105,7 +105,8 @@ Quando já existe um usuário com o mesmo **username** cadastrado:
 
 ```json
 {
-  "Unauthorized": "Usuário já existe."
+  "status_code": 400,
+  "message": "Usuário já existe."
 }
 ```
 
@@ -113,7 +114,8 @@ Quando o **username** ou **password** possuem menos de 6 caracteres:
 
 ```json
 {
-    "Unauthorized": "Os campos 'username' e 'password' devem ter no mínimo 6 caracteres."
+  "status_code": 401,
+  "message": "Os campos 'username' e 'password' devem ter no mínimo 6 caracteres."
 }
 ```
 
@@ -149,6 +151,7 @@ Quando o **username** ou **password** são inválidos:
 
 ```json
 {
-  "Unauthorized": "Acesso não autorizado."
+  "status_code": 401,
+  "message": "Acesso não autorizado."
 }
 ```

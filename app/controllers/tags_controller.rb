@@ -18,7 +18,7 @@ class TagsController < ApplicationController
       tags = Tag.where(title: tag)
       render json: tags, root: 'tags', adapter: :json, each_serializer: TagSerializer
     else
-      render json: { "Error": "A tag '#{tag}' não foi encontrada." }, status: :not_found
+      notfound("A tag '#{tag}' não foi encontrada.")
     end
     
   end
@@ -31,7 +31,7 @@ class TagsController < ApplicationController
       Tag.delete_all(title: tag)
       render json: Tag.all, root: 'tags', adapter: :json, each_serializer: TagSerializer
     else
-      render json: { "Error": "A tag '#{tag}' não foi encontrada." }, status: :not_found
+      notfound("A tag '#{tag}' não foi encontrada.")
     end
   end
 
@@ -54,5 +54,9 @@ class TagsController < ApplicationController
         hmac_secret = 'In0va_M1nd!'
         JWT.decode token, hmac_secret, true, { :algorithm => 'HS256' }
       end
+    end
+
+    def notfound( message = "não foi encontrado." )
+      render json: { status_code: 404, message: message }, status: :not_found
     end
 end
