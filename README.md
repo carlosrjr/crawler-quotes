@@ -193,7 +193,7 @@ Quando o **username** ou **password** são inválidos:
 
 ## 5. Consultas
 
-Esta sessão é distinada a mostrar como funciona as consultas na API.
+Esta sessão é distinada a mostrar como funciona as consultas na API. Para ter acesso, é preciso realizar o login antes para obter o token **JWT** e adicioná-lo nas requisições. Para fazer isso via **Postman**, você pode selecionar a aba **Authorization**, selecine o type **Bearer Token** e adicione o token, ou envie o token no header da requisição.
 
 ### Endpoint: GET /quotes
 
